@@ -1,0 +1,7 @@
+.Todo {
+  display: flex;
+}
+
+.Todo :first-child {
+  margin-right: 1%;
+}
