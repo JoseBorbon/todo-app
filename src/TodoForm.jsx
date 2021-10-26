@@ -19,13 +19,11 @@ class TodoForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.task.length === 0) return;
-    const newTask = {
+    const newTodo = {
       task: this.state.task,
-      isComplete: false,
-      isEditing: false,
       id: uuidv4(),
     };
-    this.props.handleAdd(newTask);
+    this.props.handleAdd(newTodo);
     this.setState({
       task: '',
     });
