@@ -9,6 +9,7 @@ class TodoList extends Component {
     this.state = { todos: [] }; //holds Object[]
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   add(newTodo) {
@@ -23,12 +24,32 @@ class TodoList extends Component {
     });
   }
 
+  edit(todoId) {
+    this.setState((st) => {
+      st.todos.find(({ id }) => id === todoId).isEditing = true;
+      return {
+        todos: st.todos,
+      };
+    });
+  }
+
   render() {
-    const todos = this.state.todos.map(({ task, id }) => (
-      <Todo task={task} key={id} id={id} handleRemove={this.remove} />
-    ));
+    const todos = this.state.todos.map(
+      ({ task, id, isComplete, isEditing }) => (
+        <Todo
+          task={task}
+          key={id}
+          id={id}
+          handleRemove={this.remove}
+          editTodo={this.edit}
+          isComplete={isComplete}
+          isEditing={isEditing}
+        />
+      )
+    );
     return (
       <div id="Todo-list">
+        <h1>Todo List!</h1>
         {this.state.todos.length ? todos : <div></div>}
         <TodoForm handleAdd={this.add} />
       </div>
