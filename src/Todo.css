@@ -3,7 +3,7 @@
 }
 
 .Todo :first-child {
-  margin-right: 1%;
+  padding-right: 10px;
 }
 
 .Todo-Complete {
