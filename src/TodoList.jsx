@@ -6,32 +6,36 @@ import './TodoList.css';
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.state = { todos: [] };
+    const todosArr = JSON.parse(localStorage.getItem('todos')) || [];
+    this.state = { todos: todosArr };
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
     this.edit = this.edit.bind(this);
   }
 
-  add(newTodo) {
-    this.setState((st) => {
+  async add(newTodo) {
+    await this.setState((st) => {
       return { todos: [...st.todos, newTodo] };
     });
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
   }
 
-  remove(todoId) {
-    this.setState((st) => {
+  async remove(todoId) {
+    await this.setState((st) => {
       return { todos: st.todos.filter(({ id }) => id !== todoId) };
     });
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
   }
 
-  edit(todoId, newTask) {
-    this.setState((st) => {
+  async edit(todoId, newTask) {
+    await this.setState((st) => {
       return {
         todos: st.todos.map((todo) =>
           todo.id === todoId ? { ...todo, task: newTask } : todo
         ),
       };
     });
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
   }
 
   render() {
