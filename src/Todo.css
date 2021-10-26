@@ -5,3 +5,7 @@
 .Todo :first-child {
   margin-right: 1%;
 }
+
+.Todo-Complete {
+  text-decoration: line-through;
+}
