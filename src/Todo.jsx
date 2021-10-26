@@ -10,7 +10,9 @@ class Todo extends Component {
       <div id={this.props.id} className="Todo">
         <div>{this.props.task}</div>
         <button>Edit</button>
-        <button>Remove</button>
+        <button onClick={() => this.props.handleRemove(this.props.id)}>
+          Remove
+        </button>
       </div>
     );
   }
