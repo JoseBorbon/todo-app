@@ -18,7 +18,7 @@ class Todo extends Component {
 
   toggleComplete() {
     this.setState({ isComplete: !this.state.isComplete });
-  } //Will focus on this one later
+  }
 
   change(event) {
     event.preventDefault();
