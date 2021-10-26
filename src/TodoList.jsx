@@ -6,7 +6,7 @@ import './TodoList.css';
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.state = { todos: [] }; //holds Object[]
+    this.state = { todos: [] };
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
     this.edit = this.edit.bind(this);
@@ -24,29 +24,27 @@ class TodoList extends Component {
     });
   }
 
-  edit(todoId) {
+  edit(todoId, newTask) {
     this.setState((st) => {
-      st.todos.find(({ id }) => id === todoId).isEditing = true;
       return {
-        todos: st.todos,
+        todos: st.todos.map((todo) =>
+          todo.id === todoId ? { ...todo, task: newTask } : todo
+        ),
       };
     });
   }
 
   render() {
-    const todos = this.state.todos.map(
-      ({ task, id, isComplete, isEditing }) => (
-        <Todo
-          task={task}
-          key={id}
-          id={id}
-          handleRemove={this.remove}
-          editTodo={this.edit}
-          isComplete={isComplete}
-          isEditing={isEditing}
-        />
-      )
-    );
+    const todos = this.state.todos.map(({ task, id, isComplete }) => (
+      <Todo
+        task={task}
+        key={id}
+        id={id}
+        handleRemove={this.remove}
+        editTodo={this.edit}
+        isComplete={isComplete}
+      />
+    ));
     return (
       <div id="Todo-list">
         <h1>Todo List!</h1>
