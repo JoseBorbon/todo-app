@@ -3,22 +3,32 @@ import './Todo.css';
 //flexbox css potential for todo to layer edit/remove buttons accordingly
 
 class Todo extends Component {
-  //pass down task, id, key of todo and method from parent component
-  //edit and delete buttons for todo
   constructor(props) {
     super(props);
-    this.state = { task: this.props.task, isEditing: false };
+    this.state = { task: this.props.task, isEditing: false, isComplete: false };
     this.toggleForm = this.toggleForm.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
+    this.change = this.change.bind(this);
     this.submitEdit = this.submitEdit.bind(this);
   }
 
   toggleForm() {
-    console.log('yo');
     this.setState({ isEditing: !this.state.isEditing });
+  }
+
+  toggleComplete() {
+    this.setState({ isComplete: !this.state.isComplete });
+  } //Will focus on this one later
+
+  change(event) {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   submitEdit() {
     //need to pass task up to parent component for editing purposes
+    this.props.editTodo(this.props.id, this.state.task);
+    this.setState({ isEditing: false });
   }
 
   render() {
@@ -26,14 +36,24 @@ class Todo extends Component {
     if (this.state.isEditing) {
       result = (
         <form onSubmit={this.submitEdit}>
-          <input type="text" name="task" defaultValue={this.state.task} />
-          <button onChange={this.change}>Save</button>
+          <input
+            type="text"
+            name="task"
+            defaultValue={this.state.task}
+            onChange={this.change}
+          />
+          <button>Save</button>
         </form>
       );
     } else {
       result = (
         <div id={this.props.id} className="Todo">
-          <div>{this.state.task}</div>
+          <div
+            className={this.state.isComplete ? 'Todo-Complete' : ''}
+            onClick={this.toggleComplete}
+          >
+            {this.state.task}
+          </div>
           <button onClick={this.toggleForm}>Edit</button>
           <button onClick={() => this.props.handleRemove(this.props.id)}>
             Remove
