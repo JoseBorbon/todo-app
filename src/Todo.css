@@ -1,5 +1,6 @@
 .Todo {
   display: flex;
+  font-size: 20px;
 }
 
 .Todo :first-child {
@@ -8,4 +9,27 @@
 
 .Todo-Complete {
   text-decoration: line-through;
+  transition: opacity 300ms ease-in-out;
+  transition-delay: 200ms;
+  opacity: 0.5;
+}
+
+.Todo-Complete :before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -0.5rem;
+  display: block;
+  width: 0%;
+  height: 4px;
+  background: #fff;
+}
+
+.fa-trash {
+  padding-right: 0px !important;
+}
+
+.material-icons {
+  font-size: 16px;
+  padding-right: 0px !important;
 }
