@@ -48,15 +48,17 @@ class Todo extends Component {
     } else {
       result = (
         <div id={this.props.id} className="Todo">
-          <div
-            className={this.state.isComplete ? 'Todo-Complete' : ''}
+          <li
+            className={this.state.isComplete ? 'Todo-Complete Todo' : 'Todo'}
             onClick={this.toggleComplete}
           >
             {this.state.task}
-          </div>
-          <button onClick={this.toggleForm}>Edit</button>
+          </li>
+          <button onClick={this.toggleForm}>
+            <i className="material-icons">edit</i>
+          </button>
           <button onClick={() => this.props.handleRemove(this.props.id)}>
-            Remove
+            <i className="fas fa-trash"></i>
           </button>
         </div>
       );
