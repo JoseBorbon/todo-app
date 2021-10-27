@@ -52,7 +52,7 @@ class TodoList extends Component {
     return (
       <div id="Todo-list">
         <h1>Todo List!</h1>
-        {this.state.todos.length ? todos : <div></div>}
+        <ul>{todos}</ul>
         <TodoForm handleAdd={this.add} />
       </div>
     );
